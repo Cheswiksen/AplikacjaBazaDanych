@@ -34,7 +34,7 @@ public class Main extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("Login.fxml"));
-            rootLayout = (AnchorPane) loader.load();
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -48,7 +48,6 @@ public class Main extends Application {
 
 
     public static void main(final String[] args) throws Exception {
-        LoginUtils.login("user","user");
         launch(args);
     }
 }
