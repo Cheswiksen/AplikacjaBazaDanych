@@ -1,12 +1,14 @@
-package backend.Entities;
+package backend.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Dosage_method_types", schema = "dbo", catalog = "bd2")
 public class DosageMethodTypesEntity {
     private int dosageMethodTypeId;
     private String methodTypeName;
+    private Collection<DosageMethodsEntity> dosageMethodsByDosageMethodTypeId;
 
     @Id
     @Column(name = "dosage_method_type_id")
@@ -36,7 +38,10 @@ public class DosageMethodTypesEntity {
         DosageMethodTypesEntity that = (DosageMethodTypesEntity) o;
 
         if (dosageMethodTypeId != that.dosageMethodTypeId) return false;
-        return methodTypeName != null ? methodTypeName.equals(that.methodTypeName) : that.methodTypeName == null;
+        if (methodTypeName != null ? !methodTypeName.equals(that.methodTypeName) : that.methodTypeName != null)
+            return false;
+
+        return true;
     }
 
     @Override
@@ -44,5 +49,14 @@ public class DosageMethodTypesEntity {
         int result = dosageMethodTypeId;
         result = 31 * result + (methodTypeName != null ? methodTypeName.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "dosageMethodTypesByDosageMethodTypeId")
+    public Collection<DosageMethodsEntity> getDosageMethodsByDosageMethodTypeId() {
+        return dosageMethodsByDosageMethodTypeId;
+    }
+
+    public void setDosageMethodsByDosageMethodTypeId(Collection<DosageMethodsEntity> dosageMethodsByDosageMethodTypeId) {
+        this.dosageMethodsByDosageMethodTypeId = dosageMethodsByDosageMethodTypeId;
     }
 }

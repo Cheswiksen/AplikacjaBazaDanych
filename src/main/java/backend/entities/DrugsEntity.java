@@ -1,6 +1,7 @@
-package backend.Entities;
+package backend.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Drugs", schema = "dbo", catalog = "bd2")
@@ -8,6 +9,8 @@ public class DrugsEntity {
     private int drugId;
     private String drugName;
     private String drugPurpose;
+    private Collection<DosageCollisionsEntity> dosageCollisionsByDrugId;
+    private Collection<DosagesEntity> dosagesByDrugId;
 
     @Id
     @Column(name = "drug_id")
@@ -48,7 +51,9 @@ public class DrugsEntity {
 
         if (drugId != that.drugId) return false;
         if (drugName != null ? !drugName.equals(that.drugName) : that.drugName != null) return false;
-        return drugPurpose != null ? drugPurpose.equals(that.drugPurpose) : that.drugPurpose == null;
+        if (drugPurpose != null ? !drugPurpose.equals(that.drugPurpose) : that.drugPurpose != null) return false;
+
+        return true;
     }
 
     @Override
@@ -57,5 +62,23 @@ public class DrugsEntity {
         result = 31 * result + (drugName != null ? drugName.hashCode() : 0);
         result = 31 * result + (drugPurpose != null ? drugPurpose.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "drugsByDrugId")
+    public Collection<DosageCollisionsEntity> getDosageCollisionsByDrugId() {
+        return dosageCollisionsByDrugId;
+    }
+
+    public void setDosageCollisionsByDrugId(Collection<DosageCollisionsEntity> dosageCollisionsByDrugId) {
+        this.dosageCollisionsByDrugId = dosageCollisionsByDrugId;
+    }
+
+    @OneToMany(mappedBy = "drugsByDrugId")
+    public Collection<DosagesEntity> getDosagesByDrugId() {
+        return dosagesByDrugId;
+    }
+
+    public void setDosagesByDrugId(Collection<DosagesEntity> dosagesByDrugId) {
+        this.dosagesByDrugId = dosagesByDrugId;
     }
 }

@@ -1,6 +1,6 @@
-package backend.Utils;
+package backend.utils;
 
-import backend.Entities.UsersEntity;
+import backend.entities.UsersEntity;
 import org.hibernate.Session;
 
 import java.security.MessageDigest;
@@ -34,11 +34,10 @@ public class LoginUtils {
         r.nextBytes(bytes);
         return Base64.getEncoder().encodeToString(bytes);
     }
-
+    @SuppressWarnings("unchecked")
     public static UsersEntity login(String login, String pwd) {
         UsersEntity user = null;
-        String pd = hashPwd(pwd, "dupadupadupa");
-        try (Session session = backend.Utils.Connections.getSession()) {
+        try (Session session = backend.utils.Connections.getSession()) {
             session.beginTransaction();
             List<UsersEntity> users = session.createQuery("from UsersEntity as usr where usr.login=login").list();
             if (users.size() == 1) {
@@ -54,7 +53,7 @@ public class LoginUtils {
     public static UsersEntity register(String login, String pwd) {
         UsersEntity user=login(login,pwd);
         if(user==null){
-            try (Session session = backend.Utils.Connections.getSession()) {
+            try (Session session = backend.utils.Connections.getSession()) {
                 session.beginTransaction();
                 user=new UsersEntity();
                 user.setLogin(login);

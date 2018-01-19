@@ -1,22 +1,13 @@
-package frontend.Controllers;
+package frontend.controllers;
 
 
-import backend.Entities.UsersEntity;
-import backend.Utils.LoginUtils;
-import javafx.application.Application;
+import backend.entities.UsersEntity;
+import backend.utils.LoginUtils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import sun.security.util.Password;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TextField;
 
 import static java.lang.System.*;
 
@@ -43,7 +34,7 @@ public class Login {
         } else {
             String LoginName = LoginTextField.getText();
             String PasswordName = PasswordPasswordField.getText();
-            //UsersEntity user = LoginUtils.Login(LoginName, PasswordName);
+            UsersEntity user = LoginUtils.login(LoginName, PasswordName);
             out.println("ok");
         }
 
@@ -65,7 +56,7 @@ public class Login {
         } else {
             String LoginName = LoginTextField.getText();
             String PasswordName = PasswordPasswordField.getText();
-            UsersEntity user = backend.Utils.LoginUtils.register(LoginName, PasswordName);
+            UsersEntity user = backend.utils.LoginUtils.register(LoginName, PasswordName);
             out.println("ok");
         }
     }

@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="bd2@localhost" uuid="5aff3c7a-2a71-43da-ab06-8e2f6f5673a0">
-      <driver-ref>sqlserver.jtds</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>net.sourceforge.jtds.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:jtds:sqlserver://localhost:1433/bd2;instance=mssqlserver</jdbc-url>
-      <driver-properties>
-        <property name="appName" value="DataGrip" />
-      </driver-properties>
-    </data-source>
     <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="adcc29dd-2e10-4c73-9b6b-849e3182e02d">
       <driver-ref>sqlserver.jtds</driver-ref>
       <synchronize>true</synchronize>

@@ -1,4 +1,4 @@
-package backend.Entities;
+package backend.entities;
 
 import javax.persistence.*;
 
@@ -12,7 +12,6 @@ public class UsersEntity {
     private int access;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;

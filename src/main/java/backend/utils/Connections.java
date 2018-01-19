@@ -1,26 +1,26 @@
-package backend.Utils;
+package backend.utils;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class Connections {
+class Connections {
     private static final SessionFactory sf;
 
     static {
         try {
             sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        } catch (Throwable ex) {
+        } catch (HibernateException ex) {
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    public static Session getSession() {
+    static Session getSession() {
         Session session=null;
         try {
             session=sf.openSession();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             e.printStackTrace();
         }
         return session;

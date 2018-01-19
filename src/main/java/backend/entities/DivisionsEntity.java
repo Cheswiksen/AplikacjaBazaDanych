@@ -1,12 +1,14 @@
-package backend.Entities;
+package backend.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Divisions", schema = "dbo", catalog = "bd2")
 public class DivisionsEntity {
     private int divisionId;
     private String divisionName;
+    private Collection<AnimalsEntity> animalsByDivisionId;
 
     @Id
     @Column(name = "division_id")
@@ -36,7 +38,9 @@ public class DivisionsEntity {
         DivisionsEntity that = (DivisionsEntity) o;
 
         if (divisionId != that.divisionId) return false;
-        return divisionName != null ? divisionName.equals(that.divisionName) : that.divisionName == null;
+        if (divisionName != null ? !divisionName.equals(that.divisionName) : that.divisionName != null) return false;
+
+        return true;
     }
 
     @Override
@@ -44,5 +48,14 @@ public class DivisionsEntity {
         int result = divisionId;
         result = 31 * result + (divisionName != null ? divisionName.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "divisionsByDivisionId")
+    public Collection<AnimalsEntity> getAnimalsByDivisionId() {
+        return animalsByDivisionId;
+    }
+
+    public void setAnimalsByDivisionId(Collection<AnimalsEntity> animalsByDivisionId) {
+        this.animalsByDivisionId = animalsByDivisionId;
     }
 }

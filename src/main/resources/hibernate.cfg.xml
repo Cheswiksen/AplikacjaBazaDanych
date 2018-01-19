@@ -8,19 +8,20 @@
         <property name="connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
         <property name="connection.username">admin</property>
         <property name="connection.password">admin</property>
-        <mapping class="backend.Entities.AnimalsEntity"/>
-        <mapping class="backend.Entities.BibliographiesEntity"/>
-        <mapping class="backend.Entities.BibliographyEntriesEntity"/>
-        <mapping class="backend.Entities.BibliographySourcesEntity"/>
-        <mapping class="backend.Entities.CollisionGroupsEntity"/>
-        <mapping class="backend.Entities.CollisionSeveritiesEntity"/>
-        <mapping class="backend.Entities.DivisionsEntity"/>
-        <mapping class="backend.Entities.DosageCollisionsEntity"/>
-        <mapping class="backend.Entities.DosageCommentsEntity"/>
-        <mapping class="backend.Entities.DosageMethodTypesEntity"/>
-        <mapping class="backend.Entities.DosageMethodsEntity"/>
-        <mapping class="backend.Entities.DosagesEntity"/>
-        <mapping class="backend.Entities.DrugsEntity"/>
-        <mapping class="backend.Entities.UsersEntity"/>
+        <mapping class="backend.entities.AnimalsEntity"/>
+        <mapping class="backend.entities.BibliographiesEntity"/>
+        <mapping class="backend.entities.BibliographyEntriesEntity"/>
+        <mapping class="backend.entities.BibliographySourcesEntity"/>
+        <mapping class="backend.entities.CollisionGroupsEntity"/>
+        <mapping class="backend.entities.CollisionSeveritiesEntity"/>
+        <mapping class="backend.entities.DivisionsEntity"/>
+        <mapping class="backend.entities.DosageCollisionsEntity"/>
+        <mapping class="backend.entities.DosageCommentsEntity"/>
+        <mapping class="backend.entities.DosageMethodTypesEntity"/>
+        <mapping class="backend.entities.DosageMethodsEntity"/>
+        <mapping class="backend.entities.DosagesEntity"/>
+        <mapping class="backend.entities.DrugsEntity"/>
+        <mapping class="backend.entities.UsersEntity"/>
+        <mapping class="backend.entities.UnitsEntity"/>
     </session-factory>
 </hibernate-configuration>

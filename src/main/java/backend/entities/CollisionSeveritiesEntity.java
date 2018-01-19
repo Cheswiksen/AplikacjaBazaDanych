@@ -1,12 +1,14 @@
-package backend.Entities;
+package backend.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Collision_severities", schema = "dbo", catalog = "bd2")
 public class CollisionSeveritiesEntity {
     private int collisionSeverityId;
     private String severityText;
+    private Collection<CollisionGroupsEntity> collisionGroupsByCollisionSeverityId;
 
     @Id
     @Column(name = "collision_severity_id")
@@ -36,7 +38,9 @@ public class CollisionSeveritiesEntity {
         CollisionSeveritiesEntity that = (CollisionSeveritiesEntity) o;
 
         if (collisionSeverityId != that.collisionSeverityId) return false;
-        return severityText != null ? severityText.equals(that.severityText) : that.severityText == null;
+        if (severityText != null ? !severityText.equals(that.severityText) : that.severityText != null) return false;
+
+        return true;
     }
 
     @Override
@@ -44,5 +48,14 @@ public class CollisionSeveritiesEntity {
         int result = collisionSeverityId;
         result = 31 * result + (severityText != null ? severityText.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "collisionSeveritiesByCollisionSeverityId")
+    public Collection<CollisionGroupsEntity> getCollisionGroupsByCollisionSeverityId() {
+        return collisionGroupsByCollisionSeverityId;
+    }
+
+    public void setCollisionGroupsByCollisionSeverityId(Collection<CollisionGroupsEntity> collisionGroupsByCollisionSeverityId) {
+        this.collisionGroupsByCollisionSeverityId = collisionGroupsByCollisionSeverityId;
     }
 }
