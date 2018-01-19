@@ -1,17 +1,21 @@
 package backend.Utils;
 
+import backend.Entities.UsersEntity;
+import org.hibernate.Session;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.List;
 import java.util.Random;
 
 public class LoginUtils {
-    public static String hashPwd(String password, String salt) {
+    private static String hashPwd(String password, String salt) {
         String hashedPwd = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update((password+salt).getBytes());
+            md.update((password + salt).getBytes());
             byte byteData[] = md.digest();
             StringBuilder sb = new StringBuilder();
             for (byte aByteData : byteData) {
@@ -24,10 +28,26 @@ public class LoginUtils {
         return hashedPwd;
     }
 
-    public static String GetSalt() {
+    private static String GetSalt() {
         Random r = new SecureRandom();
         byte[] bytes = new byte[32];
         r.nextBytes(bytes);
         return Base64.getEncoder().encodeToString(bytes);
+    }
+
+    public static UsersEntity login(String login, String pwd) {
+        UsersEntity user = null;
+        String pd = hashPwd(pwd, "dupadupadupa");
+        try (Session session = backend.Utils.Connections.getSession()) {
+            session.beginTransaction();
+            List<UsersEntity> users = session.createQuery("from UsersEntity as usr where usr.login=login").list();
+            if (users.size() == 1) {
+            String actualPwd=users.get(0).getPassword();
+            String triedPwd=hashPwd(pwd,users.get(0).getSalt());
+            if(actualPwd.equals(triedPwd))
+                user=users.get(0);
+            }
+        }
+        return user;
     }
 }

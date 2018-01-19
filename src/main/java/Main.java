@@ -1,28 +1,26 @@
 import java.io.IOException;
+import java.util.List;
 
+import backend.Entities.AnimalsEntity;
+import backend.Entities.UsersEntity;
+import backend.Utils.LoginUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
+import static backend.Utils.Connections.getSession;
 import static javafx.application.Application.launch;
 
 public class Main extends Application {
     private Stage logowanie;
     private AnchorPane rootLayout;
-//    private static final SessionFactory sf;
-//    static {
-//        try {
-//            sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-//        } catch (Throwable ex) {
-//            throw new ExceptionInInitializerError(ex);
-//        }
-//    }
-//    private static Session getSession() throws HibernateException {
-//        return sf.openSession();
-//    }
-
+    public Session session;
 
     public void start(Stage primaryStage) {
         this.logowanie = primaryStage;
@@ -50,19 +48,7 @@ public class Main extends Application {
 
 
     public static void main(final String[] args) throws Exception {
-        /*String password = "dupa1234";
-        String salt = LoginUtils.GetSalt();
-        String hashedPassword = LoginUtils.hashPwd(password, salt);
-        System.out.println("sol:" + salt);
-        System.out.println("zahashowane haslo: " + hashedPassword);
-
-        try (Session session = getSession()) {
-            session.beginTransaction();
-            List<AnimalsEntity> result=session.createQuery("from AnimalsEntity").list();
-            for(AnimalsEntity a:result){
-                System.out.println(a.toString());
-            }
-        }*/
+        LoginUtils.login("user","user");
         launch(args);
     }
 }
