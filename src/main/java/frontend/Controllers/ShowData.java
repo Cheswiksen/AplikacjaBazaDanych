@@ -43,9 +43,9 @@ public class ShowData {
     @FXML
     private void CheckCollisionsAndDosages()
     {
-        AnimalsEntity Animal = AnimalComboBox.getItems();
+        //AnimalsEntity Animal = AnimalComboBox.getItems();
 
-        DrugsEntity Drug1 = Drug1ComboBox.get
+        //DrugsEntity Drug1 = Drug1ComboBox;
 
     }
 }
