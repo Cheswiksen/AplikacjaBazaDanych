@@ -1,7 +1,6 @@
 package backend.Entities;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Users", schema = "dbo", catalog = "bd2")
@@ -13,6 +12,7 @@ public class UsersEntity {
     private int access;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -66,17 +66,25 @@ public class UsersEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         UsersEntity that = (UsersEntity) o;
-        return id == that.id &&
-                access == that.access &&
-                Objects.equals(login, that.login) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(salt, that.salt);
+
+        if (id != that.id) return false;
+        if (access != that.access) return false;
+        if (login != null ? !login.equals(that.login) : that.login != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (salt != null ? !salt.equals(that.salt) : that.salt != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, login, password, salt, access);
+        int result = id;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (salt != null ? salt.hashCode() : 0);
+        result = 31 * result + access;
+        return result;
     }
 }

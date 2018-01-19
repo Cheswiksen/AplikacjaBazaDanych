@@ -55,13 +55,13 @@ public class LoginUtils {
         UsersEntity user=login(login,pwd);
         if(user==null){
             try (Session session = backend.Utils.Connections.getSession()) {
+                session.beginTransaction();
                 user=new UsersEntity();
                 user.setLogin(login);
                 user.setSalt(getSalt());
                 user.setPassword(hashPwd(pwd,user.getSalt()));
                 user.setAccess(1);
-                session.beginTransaction();
-                session.save(user);
+                session.saveOrUpdate(user);
                 session.getTransaction().commit();
             }
         }
