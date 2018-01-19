@@ -28,7 +28,7 @@ public class LoginUtils {
         return hashedPwd;
     }
 
-    private static String GetSalt() {
+    private static String getSalt() {
         Random r = new SecureRandom();
         byte[] bytes = new byte[32];
         r.nextBytes(bytes);
@@ -42,11 +42,31 @@ public class LoginUtils {
             session.beginTransaction();
             List<UsersEntity> users = session.createQuery("from UsersEntity as usr where usr.login=login").list();
             if (users.size() == 1) {
-            String actualPwd=users.get(0).getPassword();
-            String triedPwd=hashPwd(pwd,users.get(0).getSalt());
-            if(actualPwd.equals(triedPwd))
-                user=users.get(0);
+                String actualPwd = users.get(0).getPassword();
+                String triedPwd = hashPwd(pwd, users.get(0).getSalt());
+                if (actualPwd.equals(triedPwd))
+                    user = users.get(0);
             }
+        }
+        return user;
+    }
+
+    public static UsersEntity register(String login, String pwd) {
+        UsersEntity user=login(login,pwd);
+        if(user==null){
+            try (Session session = backend.Utils.Connections.getSession()) {
+                user=new UsersEntity();
+                user.setLogin(login);
+                user.setSalt(getSalt());
+                user.setPassword(hashPwd(pwd,user.getSalt()));
+                user.setAccess(1);
+                session.beginTransaction();
+                session.save(user);
+                session.getTransaction().commit();
+            }
+        }
+        else{
+            return null;
         }
         return user;
     }
