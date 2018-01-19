@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="frontend.Controllers.MainWindow"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="157.0" prefWidth="238.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.Controllers.Login">
+   <children>
+      <TextField fx:id="LoginTextField" layoutX="48.0" layoutY="39.0" prefHeight="25.0" prefWidth="145.0" promptText="Login" />
+      <PasswordField fx:id="PasswordPasswordField" layoutX="48.0" layoutY="64.0" prefHeight="25.0" prefWidth="145.0" promptText="Hasło" />
+      <Button fx:id="LoginPressed" layoutX="48.0" layoutY="89.0" mnemonicParsing="false" onAction="#LoginPressed" prefHeight="25.0" prefWidth="72.0" text="Zaloguj" />
+      <Button layoutX="120.0" layoutY="89.0" mnemonicParsing="false" text="Zarejestruj" />
+   </children>
 </AnchorPane>
