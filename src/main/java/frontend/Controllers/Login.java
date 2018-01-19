@@ -65,7 +65,7 @@ public class Login {
         } else {
             String LoginName = LoginTextField.getText();
             String PasswordName = PasswordPasswordField.getText();
-            //UsersEntity user = LoginUtils.Register(LoginName, PasswordName);
+            UsersEntity user = backend.Utils.LoginUtils.register(LoginName, PasswordName);
             out.println("ok");
         }
     }

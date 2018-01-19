@@ -1,20 +1,12 @@
 import java.io.IOException;
-import java.util.List;
 
-import backend.Entities.AnimalsEntity;
-import backend.Entities.UsersEntity;
-import backend.Utils.LoginUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
-import static backend.Utils.Connections.getSession;
 import static javafx.application.Application.launch;
 
 public class Main extends Application {
@@ -31,12 +23,10 @@ public class Main extends Application {
 
     public void initRootLayout() {
         try {
-            // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("Login.fxml"));
             rootLayout = loader.load();
 
-            // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             logowanie.setScene(scene);
             logowanie.show();
