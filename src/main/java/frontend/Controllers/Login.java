@@ -28,11 +28,9 @@ public class Login {
     private PasswordField PasswordPasswordField;
 
     @FXML
-    public void LoginPressed()
-    {
+    public void LoginPressed() {
 
-        if(LoginTextField.getText().isEmpty() || PasswordPasswordField.getText().isEmpty())
-        {
+        if (LoginTextField.getText().isEmpty() || PasswordPasswordField.getText().isEmpty()) {
             //warning Podaj login/hasło
             out.println("NOT ok");
             Alert alert = new Alert(AlertType.WARNING);
@@ -42,14 +40,34 @@ public class Login {
 
             alert.showAndWait();
 
-        }
-        else {
+        } else {
             String LoginName = LoginTextField.getText();
             String PasswordName = PasswordPasswordField.getText();
-            UsersEntity user= LoginUtils.Login(LoginName, PasswordName);
+            //UsersEntity user = LoginUtils.Login(LoginName, PasswordName);
             out.println("ok");
         }
 
 
     }
+
+    @FXML
+    public void RegisterPressed() {
+        if (LoginTextField.getText().isEmpty() || PasswordPasswordField.getText().isEmpty()) {
+            //warning Podaj login/hasło
+            out.println("NOT ok");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Brak danych rejestracji");
+            alert.setHeaderText("Nie wpisano potrzebnych danych");
+            alert.setContentText("Podaj dane rejestracji");
+
+            alert.showAndWait();
+
+        } else {
+            String LoginName = LoginTextField.getText();
+            String PasswordName = PasswordPasswordField.getText();
+            //UsersEntity user = LoginUtils.Register(LoginName, PasswordName);
+            out.println("ok");
+        }
+    }
+
 }
