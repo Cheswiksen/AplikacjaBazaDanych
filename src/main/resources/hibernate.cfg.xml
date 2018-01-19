@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:jtds:sqlserver://localhost:1433/bd2;instance=mssqlserver</property>
+        <property name="connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
+        <property name="connection.username">Admin</property>
+        <property name="connection.password">Admin</property>
+        <mapping class="backend.Entities.AnimalsEntity"/>
+        <mapping class="backend.Entities.BibliographiesEntity"/>
+        <mapping class="backend.Entities.BibliographyEntriesEntity"/>
+        <mapping class="backend.Entities.BibliographySourcesEntity"/>
+        <mapping class="backend.Entities.CollisionGroupsEntity"/>
+        <mapping class="backend.Entities.CollisionSeveritiesEntity"/>
+        <mapping class="backend.Entities.DivisionsEntity"/>
+        <mapping class="backend.Entities.DosageCollisionsEntity"/>
+        <mapping class="backend.Entities.DosageCommentsEntity"/>
+        <mapping class="backend.Entities.DosageMethodTypesEntity"/>
+        <mapping class="backend.Entities.DosageMethodsEntity"/>
+        <mapping class="backend.Entities.DosagesEntity"/>
+        <mapping class="backend.Entities.DrugsEntity"/>
+    </session-factory>
+</hibernate-configuration>
