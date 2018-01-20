@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CollisionData {
-    String drugName;
-    String collisionText;
-    String collisionSeverity;
+    private String drugName;
+    private String collisionText;
+    private String collisionSeverity;
     public CollisionData(String drugName, Clob collisionText, String collisionSeverity){
         this.drugName=drugName;
         this.collisionSeverity=collisionSeverity;
@@ -21,4 +21,15 @@ public class CollisionData {
 
     }
 
+    public String getCollisionSeverity() {
+        return collisionSeverity;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public String getCollisionText() {
+        return collisionText;
+    }
 }
