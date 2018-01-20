@@ -7,9 +7,6 @@ import java.util.Collection;
 @Table(name = "Dosages", schema = "dbo", catalog = "bd2")
 public class DosagesEntity {
     private int dosageId;
-    private int drugId;
-    private Integer animalId;
-    private Integer bibliographyId;
     private Collection<DosageCommentsEntity> dosageCommentsByDosageId;
     private Collection<DosageMethodsEntity> dosageMethodsByDosageId;
     private DrugsEntity drugsByDrugId;
@@ -26,36 +23,6 @@ public class DosagesEntity {
         this.dosageId = dosageId;
     }
 
-    @Basic
-    @Column(name = "drug_id")
-    public int getDrugId() {
-        return drugId;
-    }
-
-    public void setDrugId(int drugId) {
-        this.drugId = drugId;
-    }
-
-    @Basic
-    @Column(name = "animal_id")
-    public Integer getAnimalId() {
-        return animalId;
-    }
-
-    public void setAnimalId(Integer animalId) {
-        this.animalId = animalId;
-    }
-
-    @Basic
-    @Column(name = "bibliography_id")
-    public Integer getBibliographyId() {
-        return bibliographyId;
-    }
-
-    public void setBibliographyId(Integer bibliographyId) {
-        this.bibliographyId = bibliographyId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,9 +31,11 @@ public class DosagesEntity {
         DosagesEntity that = (DosagesEntity) o;
 
         if (dosageId != that.dosageId) return false;
-        if (drugId != that.drugId) return false;
-        if (animalId != null ? !animalId.equals(that.animalId) : that.animalId != null) return false;
-        if (bibliographyId != null ? !bibliographyId.equals(that.bibliographyId) : that.bibliographyId != null)
+        if (!drugsByDrugId.equals(that.drugsByDrugId)) return false;
+        if (animalsByAnimalId != null ? !animalsByAnimalId.equals(that.animalsByAnimalId) : that.animalsByAnimalId != null)
+            return false;
+        if (bibliographiesByBibliographyId != null ? !bibliographiesByBibliographyId.equals(that.bibliographiesByBibliographyId)
+                : that.bibliographiesByBibliographyId != null)
             return false;
 
         return true;
@@ -75,9 +44,9 @@ public class DosagesEntity {
     @Override
     public int hashCode() {
         int result = dosageId;
-        result = 31 * result + drugId;
-        result = 31 * result + (animalId != null ? animalId.hashCode() : 0);
-        result = 31 * result + (bibliographyId != null ? bibliographyId.hashCode() : 0);
+        result = 31 * result + drugsByDrugId.hashCode();
+        result = 31 * result + (animalsByAnimalId != null ? animalsByAnimalId.hashCode() : 0);
+        result = 31 * result + (bibliographiesByBibliographyId != null ? bibliographiesByBibliographyId.hashCode() : 0);
         return result;
     }
 

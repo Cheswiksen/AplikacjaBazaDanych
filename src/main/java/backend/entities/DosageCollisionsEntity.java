@@ -2,12 +2,11 @@ package backend.entities;
 
 import javax.persistence.*;
 
+@SuppressWarnings("ALL")
 @Entity
 @Table(name = "Dosage_collisions", schema = "dbo", catalog = "bd2")
 public class DosageCollisionsEntity {
     private int dosageCollisionId;
-    private int drugId;
-    private int collisionGroupId;
     private DrugsEntity drugsByDrugId;
     private CollisionGroupsEntity collisionGroupsByCollisionGroupId;
 
@@ -21,26 +20,6 @@ public class DosageCollisionsEntity {
         this.dosageCollisionId = dosageCollisionId;
     }
 
-    @Basic
-    @Column(name = "drug_id")
-    public int getDrugId() {
-        return drugId;
-    }
-
-    public void setDrugId(int drugId) {
-        this.drugId = drugId;
-    }
-
-    @Basic
-    @Column(name = "collision_group_id")
-    public int getCollisionGroupId() {
-        return collisionGroupId;
-    }
-
-    public void setCollisionGroupId(int collisionGroupId) {
-        this.collisionGroupId = collisionGroupId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,17 +28,17 @@ public class DosageCollisionsEntity {
         DosageCollisionsEntity that = (DosageCollisionsEntity) o;
 
         if (dosageCollisionId != that.dosageCollisionId) return false;
-        if (drugId != that.drugId) return false;
-        if (collisionGroupId != that.collisionGroupId) return false;
-
+        if (!drugsByDrugId.equals(that.drugsByDrugId)) return false;
+        if (!collisionGroupsByCollisionGroupId.equals(that.collisionGroupsByCollisionGroupId))
+            return false;
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = dosageCollisionId;
-        result = 31 * result + drugId;
-        result = 31 * result + collisionGroupId;
+        result = 31 * result + drugsByDrugId.hashCode();
+        result = 31 * result + collisionGroupsByCollisionGroupId.hashCode();
         return result;
     }
 
