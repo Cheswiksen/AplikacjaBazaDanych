@@ -47,11 +47,11 @@ public class DrugsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DrugsEntity that = (DrugsEntity) o;
+        DrugsEntity drugsEntity = (DrugsEntity) o;
 
-        if (drugId != that.drugId) return false;
-        if (drugName != null ? !drugName.equals(that.drugName) : that.drugName != null) return false;
-        if (drugPurpose != null ? !drugPurpose.equals(that.drugPurpose) : that.drugPurpose != null) return false;
+        if (drugId != drugsEntity.drugId) return false;
+        if (drugName != null ? !drugName.equals(drugsEntity.drugName) : drugsEntity.drugName != null) return false;
+        if (drugPurpose != null ? !drugPurpose.equals(drugsEntity.drugPurpose) : drugsEntity.drugPurpose != null) return false;
 
         return true;
     }

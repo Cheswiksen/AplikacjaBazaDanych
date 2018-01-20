@@ -8,7 +8,6 @@ import java.util.Collection;
 public class AnimalsEntity {
     private int animalId;
     private String animalName;
-    private int divisionId;
     private DivisionsEntity divisionsByDivisionId;
     private Collection<DosagesEntity> dosagesByAnimalId;
 
@@ -32,26 +31,15 @@ public class AnimalsEntity {
         this.animalName = animalName;
     }
 
-    @Basic
-    @Column(name = "division_id")
-    public int getDivisionId() {
-        return divisionId;
-    }
-
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AnimalsEntity that = (AnimalsEntity) o;
+        AnimalsEntity eAnimals = (AnimalsEntity) o;
 
-        if (animalId != that.animalId) return false;
-        if (divisionId != that.divisionId) return false;
-        if (animalName != null ? !animalName.equals(that.animalName) : that.animalName != null) return false;
+        if (animalId != eAnimals.animalId) return false;
+        if (animalName != null ? !animalName.equals(eAnimals.animalName) : eAnimals.animalName != null) return false;
 
         return true;
     }
@@ -60,7 +48,6 @@ public class AnimalsEntity {
     public int hashCode() {
         int result = animalId;
         result = 31 * result + (animalName != null ? animalName.hashCode() : 0);
-        result = 31 * result + divisionId;
         return result;
     }
 

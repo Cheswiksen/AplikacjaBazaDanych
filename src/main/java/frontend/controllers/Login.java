@@ -1,6 +1,5 @@
 package frontend.controllers;
 
-
 import backend.entities.UsersEntity;
 import backend.utils.LoginUtils;
 import javafx.fxml.FXML;
@@ -8,16 +7,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
 import static java.lang.System.*;
-
 
 public class Login {
     @FXML
     private TextField LoginTextField;
     @FXML
     private PasswordField PasswordPasswordField;
-
     @FXML
     public void LoginPressed() {
 
@@ -28,7 +24,6 @@ public class Login {
             alert.setTitle("Brak danych logowania");
             alert.setHeaderText("Nie wpisano potrzebnych danych");
             alert.setContentText("Podaj dane logowania");
-
             alert.showAndWait();
 
         } else {

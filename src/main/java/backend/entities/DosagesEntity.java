@@ -28,26 +28,16 @@ public class DosagesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DosagesEntity that = (DosagesEntity) o;
+        DosagesEntity dosagesEntity = (DosagesEntity) o;
 
-        if (dosageId != that.dosageId) return false;
-        if (!drugsByDrugId.equals(that.drugsByDrugId)) return false;
-        if (animalsByAnimalId != null ? !animalsByAnimalId.equals(that.animalsByAnimalId) : that.animalsByAnimalId != null)
-            return false;
-        if (bibliographiesByBibliographyId != null ? !bibliographiesByBibliographyId.equals(that.bibliographiesByBibliographyId)
-                : that.bibliographiesByBibliographyId != null)
-            return false;
+        if (dosageId != dosagesEntity.dosageId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = dosageId;
-        result = 31 * result + drugsByDrugId.hashCode();
-        result = 31 * result + (animalsByAnimalId != null ? animalsByAnimalId.hashCode() : 0);
-        result = 31 * result + (bibliographiesByBibliographyId != null ? bibliographiesByBibliographyId.hashCode() : 0);
-        return result;
+        return dosageId;
     }
 
     @OneToMany(mappedBy = "dosagesByDosageId")

@@ -46,11 +46,12 @@ public class UnitsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UnitsEntity that = (UnitsEntity) o;
+        UnitsEntity unitsEntity = (UnitsEntity) o;
 
-        if (unitId != that.unitId) return false;
-        if (unitText != null ? !unitText.equals(that.unitText) : that.unitText != null) return false;
-        if (unitShortcut != null ? !unitShortcut.equals(that.unitShortcut) : that.unitShortcut != null) return false;
+        if (unitId != unitsEntity.unitId) return false;
+        if (unitText != null ? !unitText.equals(unitsEntity.unitText) : unitsEntity.unitText != null) return false;
+        if (unitShortcut != null ? !unitShortcut.equals(unitsEntity.unitShortcut) : unitsEntity.unitShortcut != null)
+            return false;
 
         return true;
     }

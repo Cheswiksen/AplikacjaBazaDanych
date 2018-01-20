@@ -6,8 +6,6 @@ import javax.persistence.*;
 @Table(name = "Bibliography_entries", schema = "dbo", catalog = "bd2")
 public class BibliographyEntriesEntity {
     private int bibliographyEntryId;
-    private int bibliographyId;
-    private int sourceId;
     private String sourceExtension;
     private BibliographiesEntity bibliographiesByBibliographyId;
     private BibliographySourcesEntity bibliographySourcesBySourceId;
@@ -20,26 +18,6 @@ public class BibliographyEntriesEntity {
 
     public void setBibliographyEntryId(int bibliographyEntryId) {
         this.bibliographyEntryId = bibliographyEntryId;
-    }
-
-    @Basic
-    @Column(name = "bibliography_id")
-    public int getBibliographyId() {
-        return bibliographyId;
-    }
-
-    public void setBibliographyId(int bibliographyId) {
-        this.bibliographyId = bibliographyId;
-    }
-
-    @Basic
-    @Column(name = "source_id")
-    public int getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(int sourceId) {
-        this.sourceId = sourceId;
     }
 
     @Basic
@@ -60,8 +38,7 @@ public class BibliographyEntriesEntity {
         BibliographyEntriesEntity that = (BibliographyEntriesEntity) o;
 
         if (bibliographyEntryId != that.bibliographyEntryId) return false;
-        if (bibliographyId != that.bibliographyId) return false;
-        if (sourceId != that.sourceId) return false;
+        if (!bibliographySourcesBySourceId.equals(that.bibliographySourcesBySourceId)) return false;
         if (sourceExtension != null ? !sourceExtension.equals(that.sourceExtension) : that.sourceExtension != null)
             return false;
 
@@ -71,8 +48,7 @@ public class BibliographyEntriesEntity {
     @Override
     public int hashCode() {
         int result = bibliographyEntryId;
-        result = 31 * result + bibliographyId;
-        result = 31 * result + sourceId;
+        result = 31 * result + bibliographySourcesBySourceId.hashCode();
         result = 31 * result + (sourceExtension != null ? sourceExtension.hashCode() : 0);
         return result;
     }

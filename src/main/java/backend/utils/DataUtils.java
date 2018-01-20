@@ -1,11 +1,12 @@
 package backend.utils;
 
-import backend.entities.*;
+import backend.entities.AnimalsEntity;
+import backend.entities.DrugsEntity;
 import org.hibernate.Session;
 
+import java.sql.Clob;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class DataUtils {
@@ -24,31 +25,40 @@ public class DataUtils {
         }
         return drugs;
     }
+    //Zwraca dane wszystkich kolizji zadanego DrugsEntity.
+    public static List<CollisionData> getCollisionData(DrugsEntity drug) {
+        List<CollisionData> results = null;
+        try (Session session = Connections.getSession()) {
+            String collisionQuery = "SELECT drug_name, comment, severity_text\n" +
+                    "FROM Dosage_Collisions\n" +
+                    "JOIN Drugs ON Dosage_Collisions.drug_id=Drugs.drug_id\n" +
+                    "JOIN Collision_Groups ON Dosage_Collisions.collision_group_id=Collision_Groups.collision_group_id\n" +
+                    "JOIN Collision_Severities ON Collision_Groups.collision_severity_id=Collision_Severities.collision_severity_id\n" +
+                    "JOIN(\n" +
+                    "SELECT Dosage_Collisions.collision_group_id\n" +
+                    "FROM Dosage_Collisions\n" +
+                    "JOIN Drugs ON Dosage_Collisions.drug_id=Drugs.drug_id\n" +
+                    "JOIN Collision_Groups ON Dosage_Collisions.collision_group_id=Collision_Groups.collision_group_id\n" +
+                    "JOIN Collision_Severities ON Collision_Groups.collision_severity_id=Collision_Severities.collision_severity_id\n" +
+                    "WHERE drug_name='" + drug.getDrugName() + "'\n" +
+                    ") collisions_for_given_drug ON Dosage_Collisions.collision_group_id=collisions_for_given_drug.collision_group_id\n" +
+                    "WHERE drug_name != '" + drug.getDrugName() + "';";
+            List rawResults = session.createNativeQuery(collisionQuery).list();
+            results = parseRawResults(rawResults);
 
-    public static List<CollisionData> checkCollisions(List<DrugsEntity> drugsSelected) {
-        List<CollisionData> data = null;
-
-        for (DrugsEntity d : drugsSelected) {
-            List<CollisionData> dupa = getCollisionData(d);
         }
-        return data;
+        return results;
     }
 
-    private static List<CollisionData> getCollisionData(DrugsEntity drug) {
-        try (Session session = Connections.getSession()) {
-            List<DosageCollisionsEntity> dosageCollisions = session.createQuery("from DosageCollisionsEntity ").list();
-            List<CollisionGroupsEntity> collisionGroups = session.createQuery("from CollisionGroupsEntity ").list();
-            List<DrugsEntity> drugs = session.createQuery("from DrugsEntity ").list();
-            List<CollisionSeveritiesEntity> collisionSeveritioes = session.createQuery("from CollisionSeveritiesEntity ").list();
-            List<DosageCollisionsEntity> collisionsWithDrug = dosageCollisions.stream().
-                    filter(e -> e.getDrugsByDrugId().equals(drug)).collect(Collectors.toList());
-            for (DosageCollisionsEntity col : collisionsWithDrug) {
-                List<DosageCollisionsEntity> filteredCollisions = dosageCollisions.stream().
-                        filter(e -> !e.equals(drug)
-                                && e.getCollisionGroupsByCollisionGroupId().equals(col.getCollisionGroupsByCollisionGroupId())).collect(Collectors.toList());
-            }
-
+    private static List<CollisionData> parseRawResults(List rawResults) {
+        List<CollisionData> results = new ArrayList<>();
+        for (Object r : rawResults) {
+            Object[] data = (Object[]) r;
+            String drug_name = (String) data[0];
+            Clob commentClob = (Clob) data[1];
+            String severity = (String) data[2];
+            results.add(new CollisionData(drug_name, commentClob, severity));
         }
-        return null;
+        return results;
     }
 }

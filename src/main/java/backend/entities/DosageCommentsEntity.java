@@ -6,9 +6,7 @@ import javax.persistence.*;
 @Table(name = "Dosage_comments", schema = "dbo", catalog = "bd2")
 public class DosageCommentsEntity {
     private int dosageCommentId;
-    private int dosageId;
     private String comment;
-    private Integer bibliographyId;
     private DosagesEntity dosagesByDosageId;
     private BibliographiesEntity bibliographiesByBibliographyId;
 
@@ -23,16 +21,6 @@ public class DosageCommentsEntity {
     }
 
     @Basic
-    @Column(name = "dosage_id")
-    public int getDosageId() {
-        return dosageId;
-    }
-
-    public void setDosageId(int dosageId) {
-        this.dosageId = dosageId;
-    }
-
-    @Basic
     @Column(name = "comment")
     public String getComment() {
         return comment;
@@ -40,16 +28,6 @@ public class DosageCommentsEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    @Basic
-    @Column(name = "bibliography_id")
-    public Integer getBibliographyId() {
-        return bibliographyId;
-    }
-
-    public void setBibliographyId(Integer bibliographyId) {
-        this.bibliographyId = bibliographyId;
     }
 
     @Override
@@ -60,10 +38,7 @@ public class DosageCommentsEntity {
         DosageCommentsEntity that = (DosageCommentsEntity) o;
 
         if (dosageCommentId != that.dosageCommentId) return false;
-        if (dosageId != that.dosageId) return false;
         if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
-        if (bibliographyId != null ? !bibliographyId.equals(that.bibliographyId) : that.bibliographyId != null)
-            return false;
 
         return true;
     }
@@ -71,9 +46,7 @@ public class DosageCommentsEntity {
     @Override
     public int hashCode() {
         int result = dosageCommentId;
-        result = 31 * result + dosageId;
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (bibliographyId != null ? bibliographyId.hashCode() : 0);
         return result;
     }
 

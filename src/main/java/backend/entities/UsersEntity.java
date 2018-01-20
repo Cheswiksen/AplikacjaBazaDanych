@@ -66,13 +66,13 @@ public class UsersEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UsersEntity that = (UsersEntity) o;
+        UsersEntity usersEntity = (UsersEntity) o;
 
-        if (id != that.id) return false;
-        if (access != that.access) return false;
-        if (login != null ? !login.equals(that.login) : that.login != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (salt != null ? !salt.equals(that.salt) : that.salt != null) return false;
+        if (id != usersEntity.id) return false;
+        if (access != usersEntity.access) return false;
+        if (login != null ? !login.equals(usersEntity.login) : usersEntity.login != null) return false;
+        if (password != null ? !password.equals(usersEntity.password) : usersEntity.password != null) return false;
+        if (salt != null ? !salt.equals(usersEntity.salt) : usersEntity.salt != null) return false;
 
         return true;
     }

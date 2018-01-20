@@ -2,7 +2,6 @@ package backend.entities;
 
 import javax.persistence.*;
 
-@SuppressWarnings("ALL")
 @Entity
 @Table(name = "Dosage_collisions", schema = "dbo", catalog = "bd2")
 public class DosageCollisionsEntity {
@@ -28,18 +27,13 @@ public class DosageCollisionsEntity {
         DosageCollisionsEntity that = (DosageCollisionsEntity) o;
 
         if (dosageCollisionId != that.dosageCollisionId) return false;
-        if (!drugsByDrugId.equals(that.drugsByDrugId)) return false;
-        if (!collisionGroupsByCollisionGroupId.equals(that.collisionGroupsByCollisionGroupId))
-            return false;
+
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = dosageCollisionId;
-        result = 31 * result + drugsByDrugId.hashCode();
-        result = 31 * result + collisionGroupsByCollisionGroupId.hashCode();
-        return result;
+        return dosageCollisionId;
     }
 
     @ManyToOne

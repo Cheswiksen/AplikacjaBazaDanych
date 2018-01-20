@@ -21,7 +21,7 @@
         <mapping class="backend.entities.DosageMethodsEntity"/>
         <mapping class="backend.entities.DosagesEntity"/>
         <mapping class="backend.entities.DrugsEntity"/>
-        <mapping class="backend.entities.UsersEntity"/>
         <mapping class="backend.entities.UnitsEntity"/>
+        <mapping class="backend.entities.UsersEntity"/>
     </session-factory>
 </hibernate-configuration>

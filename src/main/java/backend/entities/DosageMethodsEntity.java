@@ -6,11 +6,8 @@ import javax.persistence.*;
 @Table(name = "Dosage_methods", schema = "dbo", catalog = "bd2")
 public class DosageMethodsEntity {
     private int dosageMethodId;
-    private int dosageId;
-    private int unitId;
     private float unitLowerValue;
     private Float unitHigherValue;
-    private int dosageMethodTypeId;
     private DosagesEntity dosagesByDosageId;
     private UnitsEntity unitsByUnitId;
     private DosageMethodTypesEntity dosageMethodTypesByDosageMethodTypeId;
@@ -23,26 +20,6 @@ public class DosageMethodsEntity {
 
     public void setDosageMethodId(int dosageMethodId) {
         this.dosageMethodId = dosageMethodId;
-    }
-
-    @Basic
-    @Column(name = "dosage_id")
-    public int getDosageId() {
-        return dosageId;
-    }
-
-    public void setDosageId(int dosageId) {
-        this.dosageId = dosageId;
-    }
-
-    @Basic
-    @Column(name = "unit_id")
-    public int getUnitId() {
-        return unitId;
-    }
-
-    public void setUnitId(int unitId) {
-        this.unitId = unitId;
     }
 
     @Basic
@@ -65,16 +42,6 @@ public class DosageMethodsEntity {
         this.unitHigherValue = unitHigherValue;
     }
 
-    @Basic
-    @Column(name = "dosage_method_type_id")
-    public int getDosageMethodTypeId() {
-        return dosageMethodTypeId;
-    }
-
-    public void setDosageMethodTypeId(int dosageMethodTypeId) {
-        this.dosageMethodTypeId = dosageMethodTypeId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,10 +50,7 @@ public class DosageMethodsEntity {
         DosageMethodsEntity that = (DosageMethodsEntity) o;
 
         if (dosageMethodId != that.dosageMethodId) return false;
-        if (dosageId != that.dosageId) return false;
-        if (unitId != that.unitId) return false;
         if (Float.compare(that.unitLowerValue, unitLowerValue) != 0) return false;
-        if (dosageMethodTypeId != that.dosageMethodTypeId) return false;
         if (unitHigherValue != null ? !unitHigherValue.equals(that.unitHigherValue) : that.unitHigherValue != null)
             return false;
 
@@ -96,11 +60,8 @@ public class DosageMethodsEntity {
     @Override
     public int hashCode() {
         int result = dosageMethodId;
-        result = 31 * result + dosageId;
-        result = 31 * result + unitId;
         result = 31 * result + (unitLowerValue != +0.0f ? Float.floatToIntBits(unitLowerValue) : 0);
         result = 31 * result + (unitHigherValue != null ? unitHigherValue.hashCode() : 0);
-        result = 31 * result + dosageMethodTypeId;
         return result;
     }
 
