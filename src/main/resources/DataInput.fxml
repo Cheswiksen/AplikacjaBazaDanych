@@ -8,10 +8,10 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DataInputController">
    <children>
-      <ComboBox fx:id="AnimalComboBox" layoutX="14.0" layoutY="14.0" onShown="#OnStart" prefWidth="150.0" promptText="Zwierzę" />
-      <ComboBox fx:id="Drug1ComboBox" layoutX="14.0" layoutY="63.0" onShown="#getDrugs" prefWidth="150.0" promptText="Lek pierwszy" />
-      <ComboBox fx:id="Drug2ComboBox" layoutX="14.0" layoutY="95.0" onShown="#getDrugs" prefWidth="150.0" promptText="Lek drugi" />
-      <ComboBox fx:id="Drug3ComboBox" layoutX="14.0" layoutY="127.0" onShown="#getDrugs" prefWidth="150.0" promptText="Lek trzeci" />
+      <ComboBox fx:id="AnimalComboBox" layoutX="14.0" layoutY="14.0" onShowing="#OnStartAnimal" prefWidth="150.0" promptText="Zwierzę" />
+      <ComboBox fx:id="Drug1ComboBox" layoutX="14.0" layoutY="63.0" onShowing="#OnStartDrug1" prefWidth="150.0" promptText="Lek pierwszy" />
+      <ComboBox fx:id="Drug2ComboBox" layoutX="14.0" layoutY="95.0" onShowing="#OnStartDrug2" prefWidth="150.0" promptText="Lek drugi" />
+      <ComboBox fx:id="Drug3ComboBox" layoutX="14.0" layoutY="127.0" onShowing="#OnStartDrug3" prefWidth="150.0" promptText="Lek trzeci" />
       <Button layoutX="14.0" layoutY="165.0" mnemonicParsing="false" onAction="#CheckCollisionsAndDosages" prefHeight="25.0" prefWidth="150.0" text="Sprawdź" />
       <TableView layoutX="209.0" layoutY="27.0" prefHeight="200.0" prefWidth="301.0">
         <columns>
