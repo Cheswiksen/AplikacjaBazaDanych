@@ -4,14 +4,19 @@ import backend.entities.AnimalsEntity;
 import backend.entities.DrugsEntity;
 import backend.entities.UsersEntity;
 import backend.utils.CollisionData;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.swing.table.TableColumn;
 
 import java.util.List;
+import java.util.Observable;
 
 import static backend.utils.DataUtils.*;
 
@@ -19,14 +24,17 @@ import static backend.utils.DataUtils.*;
 public class DataInputController {
     private Mediator mediator;
     private UsersEntity user;
+
     @FXML
-    TableColumn lek1Table;
+    private TableView<CollisionView> TableViewView;
     @FXML
-    TableColumn Lek2Table;
+    private javafx.scene.control.TableColumn<CollisionView, String> lek1;
     @FXML
-    TableColumn TekstTable;
+    private javafx.scene.control.TableColumn<CollisionView, String> lek2;
     @FXML
-    TableColumn WarnTable;
+    private javafx.scene.control.TableColumn<CollisionView, String> tekst;
+    @FXML
+    private javafx.scene.control.TableColumn<CollisionView, String> warn;
     @FXML
     ComboBox AnimalComboBox;
     @FXML
@@ -35,6 +43,12 @@ public class DataInputController {
     ComboBox Drug2ComboBox;
     @FXML
     ComboBox Drug3ComboBox;
+    public ObservableList<CollisionView> list = FXCollections.observableArrayList();
+
+
+    public DataInputController() {
+    }
+
     @FXML
     public void OnStartAnimal()
     {
@@ -80,7 +94,16 @@ public class DataInputController {
     @FXML
     public void CheckCollisionsAndDosages()
     {
+        //List<CollisionData> kolizje = getCollisionData((DrugsEntity) Drug1ComboBox.getValue());
+        // To nie działa nie wiem dlaczego wróce potem
 
+
+        lek1.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("lek1"));
+        lek2.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("lek2"));
+        tekst.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("severity"));
+        warn.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("text"));
+
+        TableViewView.setItems(list);
     }
     public void setMediator(Mediator mediator) {
         this.mediator = mediator;
