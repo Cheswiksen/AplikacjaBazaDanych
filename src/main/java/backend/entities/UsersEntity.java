@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Users", schema = "dbo", catalog = "bd2")
+
 public class UsersEntity {
     private int id;
     private String login;
@@ -14,13 +15,14 @@ public class UsersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
+
 
     @Basic
     @Column(name = "login")

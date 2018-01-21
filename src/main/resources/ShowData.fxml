@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShowData">
    <children>
@@ -12,5 +13,13 @@
       <ComboBox fx:id="Drug2ComboBox" layoutX="14.0" layoutY="95.0" onShown="#getDrugs" prefWidth="150.0" promptText="Lek drugi" />
       <ComboBox fx:id="Drug3ComboBox" layoutX="14.0" layoutY="127.0" onShown="#getDrugs" prefWidth="150.0" promptText="Lek trzeci" />
       <Button layoutX="14.0" layoutY="165.0" mnemonicParsing="false" onAction="#CheckCollisionsAndDosages" prefHeight="25.0" prefWidth="150.0" text="Sprawdź" />
+      <TableView layoutX="209.0" layoutY="27.0" prefHeight="200.0" prefWidth="301.0">
+        <columns>
+            <TableColumn fx:id="Lek1Table" prefWidth="75.0" text="Lek" />
+            <TableColumn fx:id="Lek2Tabl" prefWidth="75.0" text="Lek" />
+            <TableColumn fx:id="TekstTable" prefWidth="75.0" text="tekst" />
+            <TableColumn fx:id="WarnTable" prefWidth="75.0" text="Ostrzeżenie" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

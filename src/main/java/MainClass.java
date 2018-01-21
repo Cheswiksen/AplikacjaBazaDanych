@@ -1,3 +1,5 @@
+
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -9,7 +11,7 @@ import org.hibernate.Session;
 
 import static javafx.application.Application.launch;
 
-public class Main extends Application {
+public class MainClass extends Application {
     private Stage logowanie;
     private AnchorPane rootLayout;
     public Session session;
@@ -17,15 +19,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.logowanie = primaryStage;
         this.logowanie.setTitle("Logowanie");
-
         initRootLayout();
     }
 
     public void initRootLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Login.fxml"));
+            loader.setLocation(MainClass.class.getResource("Login.fxml"));
             rootLayout = loader.load();
+
 
             Scene scene = new Scene(rootLayout);
             logowanie.setScene(scene);
@@ -34,6 +36,8 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+
 
 
 
