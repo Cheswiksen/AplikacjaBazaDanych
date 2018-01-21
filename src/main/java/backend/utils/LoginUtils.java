@@ -2,6 +2,7 @@ package backend.utils;
 
 import backend.entities.UsersEntity;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -34,12 +35,16 @@ public class LoginUtils {
         r.nextBytes(bytes);
         return Base64.getEncoder().encodeToString(bytes);
     }
+
     @SuppressWarnings("unchecked")
     public static UsersEntity login(String login, String pwd) {
         UsersEntity user = null;
         try (Session session = backend.utils.Connections.getSession()) {
             session.beginTransaction();
-            List<UsersEntity> users = session.createQuery("from UsersEntity as usr where usr.login=login").list();
+
+            Query q = session.createQuery("from UsersEntity as usr where usr.login=:Login");
+            q.setParameter("Login", login);
+            List<UsersEntity> users = q.list();
             if (users.size() == 1) {
                 String actualPwd = users.get(0).getPassword();
                 String triedPwd = hashPwd(pwd, users.get(0).getSalt());
@@ -51,20 +56,19 @@ public class LoginUtils {
     }
 
     public static UsersEntity register(String login, String pwd) {
-        UsersEntity user=login(login,pwd);
-        if(user==null){
+        UsersEntity user = login(login, pwd);
+        if (user == null) {
             try (Session session = backend.utils.Connections.getSession()) {
                 session.beginTransaction();
-                user=new UsersEntity();
+                user = new UsersEntity();
                 user.setLogin(login);
                 user.setSalt(getSalt());
-                user.setPassword(hashPwd(pwd,user.getSalt()));
+                user.setPassword(hashPwd(pwd, user.getSalt()));
                 user.setAccess(1);
                 session.saveOrUpdate(user);
                 session.getTransaction().commit();
             }
-        }
-        else{
+        } else {
             return null;
         }
         return user;

@@ -12,6 +12,7 @@ public class UsersEntity {
     private int access;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -72,9 +73,7 @@ public class UsersEntity {
         if (access != usersEntity.access) return false;
         if (login != null ? !login.equals(usersEntity.login) : usersEntity.login != null) return false;
         if (password != null ? !password.equals(usersEntity.password) : usersEntity.password != null) return false;
-        if (salt != null ? !salt.equals(usersEntity.salt) : usersEntity.salt != null) return false;
-
-        return true;
+        return salt != null ? salt.equals(usersEntity.salt) : usersEntity.salt == null;
     }
 
     @Override
