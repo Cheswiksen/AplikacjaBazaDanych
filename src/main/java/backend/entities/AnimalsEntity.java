@@ -11,6 +11,7 @@ public class AnimalsEntity {
     private DivisionsEntity divisionsByDivisionId;
     private Collection<DosagesEntity> dosagesByAnimalId;
 
+
     @Id
     @Column(name = "animal_id")
     public int getAnimalId() {

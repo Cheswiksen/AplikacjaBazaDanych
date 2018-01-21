@@ -6,8 +6,8 @@
     <session-factory>
         <property name="connection.url">jdbc:jtds:sqlserver://localhost:1433/bd2;instance=mssqlserver</property>
         <property name="connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
-        <property name="connection.username">admin</property>
-        <property name="connection.password">admin</property>
+        <property name="connection.username">Admin</property>
+        <property name="connection.password">Admin</property>
         <mapping class="backend.entities.AnimalsEntity"/>
         <mapping class="backend.entities.BibliographiesEntity"/>
         <mapping class="backend.entities.BibliographyEntriesEntity"/>
