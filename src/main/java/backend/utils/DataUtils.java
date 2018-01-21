@@ -25,6 +25,7 @@ public class DataUtils {
         }
         return drugs;
     }
+
     //Zwraca dane wszystkich kolizji zadanego DrugsEntity.
     public static List<CollisionData> getCollisionData(DrugsEntity drug) {
         List<CollisionData> results;
@@ -69,7 +70,7 @@ public class DataUtils {
     }
 
     private static List<DosageData> parseRawDosages(List rawDosages) {
-
+        return null;
     }
 
     private static List<CollisionData> parseRawCollisions(List rawCollisions) {

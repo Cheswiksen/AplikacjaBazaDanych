@@ -13,7 +13,6 @@ public class UsersEntity {
     private int access;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
