@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class CollisionData {
 
-    private SimpleStringProperty drugName;
-    private SimpleStringProperty collisionText;
-    private SimpleStringProperty collisionSeverity;
+    public SimpleStringProperty drugName;
+    public SimpleStringProperty collisionText;
+    public SimpleStringProperty collisionSeverity;
     public CollisionData(String drugName, Clob collisionText, String collisionSeverity){
         this.drugName = new SimpleStringProperty(drugName);
         this.collisionSeverity = new SimpleStringProperty(collisionSeverity);
