@@ -1,35 +1,35 @@
 package backend.utils;
 
-import backend.entities.DrugsEntity;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.Clob;
 import java.sql.SQLException;
-import java.util.List;
 
 public class CollisionData {
-    private String drugName;
-    private String collisionText;
-    private String collisionSeverity;
+
+    private SimpleStringProperty drugName;
+    private SimpleStringProperty collisionText;
+    private SimpleStringProperty collisionSeverity;
     public CollisionData(String drugName, Clob collisionText, String collisionSeverity){
-        this.drugName=drugName;
-        this.collisionSeverity=collisionSeverity;
+        this.drugName = new SimpleStringProperty(drugName);
+        this.collisionSeverity = new SimpleStringProperty(collisionSeverity);
         try {
-            this.collisionText=collisionText.getSubString(1, (int) collisionText.length());
+            this.collisionText = new SimpleStringProperty(collisionText.getSubString(1, (int) collisionText.length()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
 
-    public String getCollisionSeverity() {
+    public SimpleStringProperty getCollisionSeverity() {
         return collisionSeverity;
     }
 
-    public String getDrugName() {
+    public SimpleStringProperty getDrugName() {
         return drugName;
     }
 
-    public String getCollisionText() {
+    public SimpleStringProperty getCollisionText() {
         return collisionText;
     }
 }
