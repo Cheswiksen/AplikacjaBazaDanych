@@ -41,7 +41,7 @@ public class MainClass extends Application {
     public void initLoginLayout() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainClass.class.getResource("/Login.fxml"));
+            loader.setLocation(MainClass.class.getResource("/LoginView.fxml"));
             AnchorPane rootLayout = loader.load();
             loginScene = new Scene(rootLayout);
             loginController = loader.getController();
@@ -54,7 +54,7 @@ public class MainClass extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             String Url;
-            Url = "/DataInput.fxml";
+            Url = "/DataInputView.fxml";
             loader.setLocation(MainClass.class.getResource(Url));
             AnchorPane showDataLayout = loader.load();
             dataInputScene = new Scene(showDataLayout);

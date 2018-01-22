@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DataInputController">
+   <children>
+       <ComboBox fx:id="AnimalComboBox" layoutX="14.0" layoutY="14.0" prefWidth="150.0" promptText="Zwierzę"/>
+       <ComboBox fx:id="Drug1ComboBox" layoutX="14.0" layoutY="63.0" prefWidth="150.0" promptText="Lek pierwszy"/>
+       <ComboBox fx:id="Drug2ComboBox" layoutX="14.0" layoutY="95.0" prefWidth="150.0" promptText="Lek drugi"/>
+       <ComboBox fx:id="Drug3ComboBox" layoutX="14.0" layoutY="127.0" prefWidth="150.0" promptText="Lek trzeci"/>
+       <Button layoutX="14.0" layoutY="165.0" mnemonicParsing="false" onAction="#GoToDosages" prefHeight="25.0"
+               prefWidth="150.0" text="Sprawdź"/>
+      <TableView fx:id="TableViewView" layoutX="209.0" layoutY="27.0" prefHeight="200.0" prefWidth="301.0">
+        <columns>
+            <TableColumn fx:id="lek1" prefWidth="75.0" text="Lek" />
+            <TableColumn fx:id="lek2" prefWidth="75.0" text="Lek" />
+            <TableColumn fx:id="tekst" prefWidth="75.0" text="tekst" />
+            <TableColumn fx:id="warn" prefWidth="75.0" text="Ostrzeżenie" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
