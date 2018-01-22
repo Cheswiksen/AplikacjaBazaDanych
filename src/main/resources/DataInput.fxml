@@ -21,5 +21,14 @@
             <TableColumn fx:id="warn" prefWidth="75.0" text="Ostrzeżenie" />
         </columns>
       </TableView>
+      <TableView layoutX="164.0" layoutY="237.0" prefHeight="137.0" prefWidth="349.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="lek" />
+            <TableColumn prefWidth="45.0" text="min" />
+            <TableColumn prefWidth="43.0" text="max" />
+            <TableColumn prefWidth="71.0" text="jednostka" />
+            <TableColumn prefWidth="113.0" text="Droga podania" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
