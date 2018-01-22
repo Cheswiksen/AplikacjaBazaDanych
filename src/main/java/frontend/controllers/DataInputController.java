@@ -82,6 +82,8 @@ public class DataInputController {
         }
     }
 
+    // TODO: 22.01.2018 trzeba przefiltrowac te kolizje, tzn wyswietlic tylko te, ktore rowniez zostaly wybrane-
+// TODO: 22.01.2018 backend wyrzuca wszystkie leki ktore koliduja z podanym
     @FXML
     public void CheckCollisionsAndDosages() {
         //drugscombobox zwraca ci stringa, bo wrzuciles do niego drugName
@@ -93,15 +95,14 @@ public class DataInputController {
         List kolizje = getCollisionData(drugs.stream().filter(
                 e -> e.getDrugName().equals(Drug1ComboBox.getValue())
         ).collect(Collectors.toList()).get(0));
+        //musisz jakos powyrzucac te kolizje ktorych nie chcemy :P
 
-
-
+        ObservableList observableKolizje = FXCollections.observableArrayList(kolizje);
         lek1.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("lek1"));
         lek2.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("lek2"));
         tekst.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("severity"));
         warn.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("text"));
-
-        TableViewView.setItems(list);
+        TableViewView.setItems(observableKolizje);
     }
 
     public void setMediator(Mediator mediator) {
