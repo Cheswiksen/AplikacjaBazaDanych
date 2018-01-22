@@ -98,10 +98,10 @@ public class DataInputController {
         //musisz jakos powyrzucac te kolizje ktorych nie chcemy :P
 
         ObservableList observableKolizje = FXCollections.observableArrayList(kolizje);
-        lek1.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("lek1"));
-        lek2.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("lek2"));
-        tekst.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("severity"));
-        warn.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("text"));
+        lek1.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("drugName"));
+        lek2.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("drugName"));
+        tekst.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("collisionSeverity"));
+        warn.setCellValueFactory(new PropertyValueFactory<CollisionView, String>("collisionText"));
         TableViewView.setItems(observableKolizje);
     }
 
