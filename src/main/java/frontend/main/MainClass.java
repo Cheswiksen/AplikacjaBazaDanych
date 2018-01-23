@@ -54,11 +54,12 @@ public class MainClass extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             String Url;
-            Url = "/DataInputView.fxml";
+            Url = "/DataInput.fxml";
             loader.setLocation(MainClass.class.getResource(Url));
             AnchorPane showDataLayout = loader.load();
             dataInputScene = new Scene(showDataLayout);
             dataInputController = loader.getController();
+            System.out.println("dupa");
         } catch (IOException e) {
             e.printStackTrace();
         }

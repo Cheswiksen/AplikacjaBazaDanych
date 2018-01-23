@@ -3,6 +3,7 @@ package backend.utils;
 import backend.entities.AnimalsEntity;
 import backend.entities.DrugsEntity;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.sql.Clob;
 import java.util.ArrayList;
@@ -24,6 +25,17 @@ public class DataUtils {
             drugs = session.createQuery("from DrugsEntity ").list();
         }
         return drugs;
+    }
+
+    public static DrugsEntity getDrugByName(String name) {
+        DrugsEntity drug;
+        try (Session session = Connections.getSession()) {
+            String hql = "from DrugsEntity where drugName=:name";
+            Query q = session.createQuery(hql);
+            q.setParameter("name", name);
+            drug = (DrugsEntity) q.list().get(0);
+        }
+        return drug;
     }
 
     //Zwraca dane wszystkich kolizji zadanego DrugsEntity.
