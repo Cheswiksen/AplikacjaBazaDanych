@@ -55,4 +55,8 @@ public class DosageData {
     public SimpleStringProperty unitProperty() {
         return unit;
     }
+
+    public SimpleStringProperty commentProperty() {
+        return comment;
+    }
 }

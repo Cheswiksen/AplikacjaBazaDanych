@@ -37,11 +37,10 @@ public class LoginUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static UsersEntity login(String login, String pwd) {
+    public static UsersEntity login(String login, String pwd) throws BadPasswordException {
         UsersEntity user = null;
         try (Session session = backend.utils.Connections.getSession()) {
             session.beginTransaction();
-
             Query q = session.createQuery("from UsersEntity as usr where usr.login=:Login");
             q.setParameter("Login", login);
             List<UsersEntity> users = q.list();
@@ -50,12 +49,15 @@ public class LoginUtils {
                 String triedPwd = hashPwd(pwd, users.get(0).getSalt());
                 if (actualPwd.equals(triedPwd))
                     user = users.get(0);
+                else {
+                    throw new BadPasswordException();
+                }
             }
         }
         return user;
     }
 
-    public static UsersEntity register(String login, String pwd) {
+    public static UsersEntity register(String login, String pwd) throws BadPasswordException {
         UsersEntity user = login(login, pwd);
         if (user == null) {
             try (Session session = backend.utils.Connections.getSession()) {

@@ -68,6 +68,10 @@ public class DataInputController {
         initDrugs();
         initCollisions();
         initDosages();
+        animalComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            updateDosages();
+        }
+        ));
         drug1ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
             checkCollisions();
             updateDosages();

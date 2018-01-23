@@ -2,6 +2,7 @@ package frontend.controllers;
 
 
 import backend.entities.UsersEntity;
+import backend.utils.BadPasswordException;
 import backend.utils.LoginUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -57,8 +58,31 @@ public class LoginController {
             alert.setHeaderText("Nie wpisano potrzebnych danych");
             alert.setContentText("Podaj dane rejestracji");
             alert.showAndWait();
+        } else register();
+    }
 
-        } else GetIn();
+    private void register() {
+        String LoginName = LoginTextField.getText();
+        String PasswordName = PasswordPasswordField.getText();
+        user = null;
+        try {
+            user = LoginUtils.register(LoginName, PasswordName);
+            if (user == null) {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Taki użytkownik już istnieje!");
+                alert.setHeaderText("ERROR");
+                alert.setContentText("ERROR");
+                alert.showAndWait();
+            } else {
+                mediator.showDataInput(user);
+            }
+        } catch (BadPasswordException e) {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Taki użytkownik już istnieje!");
+            alert.setHeaderText("ERROR");
+            alert.setContentText("ERROR!");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -66,17 +90,19 @@ public class LoginController {
         String LoginName = LoginTextField.getText();
         String PasswordName = PasswordPasswordField.getText();
         user = null;
-        user = LoginUtils.login(LoginName, PasswordName);
-
-        if (user == null) {
+        try {
+            user = LoginUtils.login(LoginName, PasswordName);
+            if (user == null) {
+                throw new BadPasswordException();
+            } else {
+                mediator.showDataInput(user);
+            }
+        } catch (BadPasswordException e) {
             Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Zle dane");
-            alert.setHeaderText("Nie wpisano poprawnych danych");
-            alert.setContentText("Podaj poprawne dane logowania");
+            alert.setTitle("ERROR!");
+            alert.setHeaderText("ERROR");
+            alert.setContentText("Złe hasło!");
             alert.showAndWait();
-        } else {
-            mediator.showDataInput(user);
-            out.println("ok");
         }
     }
 
