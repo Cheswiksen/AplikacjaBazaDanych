@@ -58,7 +58,13 @@ public class LoginController {
             alert.setContentText("Podaj dane rejestracji");
             alert.showAndWait();
 
-        } else GetIn();
+        } else
+        {
+            String LoginName = LoginTextField.getText();
+            String PasswordName = PasswordPasswordField.getText();
+            UsersEntity user = LoginUtils.register(LoginName, PasswordName);
+            GetIn();
+        }
     }
 
     @FXML
