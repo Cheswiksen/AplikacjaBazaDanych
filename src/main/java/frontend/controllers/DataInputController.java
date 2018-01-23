@@ -5,6 +5,7 @@ import backend.entities.DrugsEntity;
 import backend.entities.UsersEntity;
 import backend.utils.CollisionData;
 import backend.utils.DataUtils;
+import backend.utils.DosageData;
 import frontend.utils.CollisionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,10 +21,22 @@ import static backend.utils.DataUtils.getAnimals;
 import static backend.utils.DataUtils.getDrugs;
 
 
+@SuppressWarnings("ALL")
 public class DataInputController {
-    public TableColumn lek;
-    private Mediator mediator;
-    private UsersEntity user;
+    @FXML
+    public TableView dosageTableView;
+    @FXML
+    public TableColumn drugDosageCol;
+    @FXML
+    public TableColumn minValueCol;
+    @FXML
+    public TableColumn maxValueCol;
+    @FXML
+    public TableColumn unitCol;
+    @FXML
+    public TableColumn methodCol;
+    @FXML
+    public TableColumn commentCol1;
     @FXML
     private TableView<CollisionView> collisionTableView;
     @FXML
@@ -42,26 +55,67 @@ public class DataInputController {
     ComboBox drug2ComboBox;
     @FXML
     ComboBox drug3ComboBox;
-    public ObservableList<CollisionView> list = FXCollections.observableArrayList();
     private List<AnimalsEntity> animals;
     private List<DrugsEntity> drugs;
-
-    public DataInputController() {
-
-    }
+    private Mediator mediator;
+    private UsersEntity user;
 
     @FXML
     public void initialize() {
         animals = getAnimals();
         drugs = getDrugs();
+        initAnimals();
         initDrugs();
         initCollisions();
-        drug1ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->
-                checkCollisions()));
-        drug2ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->
-                checkCollisions()));
-        drug3ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->
-                checkCollisions()));
+        initDosages();
+        drug1ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            checkCollisions();
+            updateDosages();
+        }
+        ));
+        drug2ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            checkCollisions();
+            updateDosages();
+        }));
+        drug3ComboBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            checkCollisions();
+            updateDosages();
+        }));
+    }
+
+    private void initDosages() {
+        drugDosageCol.setCellValueFactory(new PropertyValueFactory<>("drug"));
+        minValueCol.setCellValueFactory(new PropertyValueFactory<>("min"));
+        maxValueCol.setCellValueFactory(new PropertyValueFactory<>("max"));
+        unitCol.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        methodCol.setCellValueFactory(new PropertyValueFactory<>("method"));
+        commentCol1.setCellValueFactory(new PropertyValueFactory<>("comment"));
+
+    }
+
+    private void initAnimals() {
+        drugs = getDrugs();
+        Callback<ListView<AnimalsEntity>, ListCell<AnimalsEntity>> cellFactory = lv -> new ListCell<AnimalsEntity>() {
+            @Override
+            protected void updateItem(AnimalsEntity item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getAnimalName());
+            }
+        };
+        animalComboBox.setCellFactory(cellFactory);
+        animalComboBox.setButtonCell(cellFactory.call(null));
+        animalComboBox.setItems(FXCollections.observableArrayList(animals));
+    }
+
+    private void updateDosages() {
+        AnimalsEntity animal = (AnimalsEntity) animalComboBox.getValue();
+        DrugsEntity d1 = (DrugsEntity) drug1ComboBox.getValue();
+        DrugsEntity d2 = (DrugsEntity) drug2ComboBox.getValue();
+        DrugsEntity d3 = (DrugsEntity) drug3ComboBox.getValue();
+        List<DosageData> dosageData = DataUtils.getDosageData(animal, d1);
+        dosageData.addAll(DataUtils.getDosageData(animal, d2));
+        dosageData.addAll(DataUtils.getDosageData(animal, d3));
+        dosageTableView.setItems(FXCollections.observableArrayList(dosageData));
     }
 
     private void initCollisions() {

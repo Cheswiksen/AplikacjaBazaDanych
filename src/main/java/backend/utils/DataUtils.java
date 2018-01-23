@@ -63,26 +63,37 @@ public class DataUtils {
     }
 
     public static List<DosageData> getDosageData(AnimalsEntity animal, DrugsEntity drug) {
+        if (animal == null || drug == null)
+            return new ArrayList<>();
         List<DosageData> results;
         try (Session session = Connections.getSession()) {
             String dosageQuery = "SELECT Dosage_Method_Types.method_type_name, Dosage_Methods.unit_lower_value, Dosage_Methods.unit_higher_value, Units.unit_shortcut, Dosage_Comments.comment\n" +
                     "FROM Dosages  \n" +
                     "LEFT OUTER JOIN Animals  ON Animals.animal_id=Dosages.animal_id \n" +
                     "JOIN Drugs  ON Dosages.drug_id=Drugs.drug_id \n" +
-                    "JOIN Dosage_Methods  on Dosage_Methods.dosage_id=Dosages.dosage_id\n" +
-                    "JOIN Units on Dosage_Methods.unit_id=Units.unit_id \n" +
-                    "JOIN Dosage_Method_Types on Dosage_Methods.dosage_method_type_id=Dosage_Method_Types.dosage_method_type_id \n" +
-                    "LEFT OUTER JOIN Dosage_Comments on Dosage_Comments.dosage_id=Dosages.dosage_id\n" +
-                    "WHERE (Dosages.animal_id IS NULL OR Animals.animal_name=" + animal.getAnimalName() + ") " +
-                    "AND Drugs.drug_name=" + drug.getDrugName() + ";";
+                    "JOIN Dosage_Methods  ON Dosage_Methods.dosage_id=Dosages.dosage_id\n" +
+                    "JOIN Units ON Dosage_Methods.unit_id=Units.unit_id \n" +
+                    "JOIN Dosage_Method_Types ON Dosage_Methods.dosage_method_type_id=Dosage_Method_Types.dosage_method_type_id \n" +
+                    "LEFT OUTER JOIN Dosage_Comments ON Dosage_Comments.dosage_id=Dosages.dosage_id\n" +
+                    "WHERE (Dosages.animal_id IS NULL OR Animals.animal_name='" + animal.getAnimalName() + "') AND Drugs.drug_name='" + drug.getDrugName() + "';";
             List rawDosages = session.createNativeQuery(dosageQuery).list();
-            results = parseRawDosages(rawDosages);
+            results = parseRawDosages(animal, drug, rawDosages);
         }
         return results;
     }
 
-    private static List<DosageData> parseRawDosages(List rawDosages) {
-        return null;
+    private static List<DosageData> parseRawDosages(AnimalsEntity animal, DrugsEntity drug, List rawDosages) {
+        List<DosageData> results = new ArrayList<>();
+        for (Object r : rawDosages) {
+            Object[] data = (Object[]) r;
+            String method = (String) data[0];
+            Float low = (Float) data[1];
+            Float high = (Float) data[2];
+            String unit = (String) data[3];
+            Clob comment = (Clob) data[4];
+            results.add(new DosageData(drug.getDrugName(), animal.getAnimalName(), low, high, method, unit, comment));
+        }
+        return results;
     }
 
     private static List<CollisionData> parseRawCollisions(List rawCollisions) {

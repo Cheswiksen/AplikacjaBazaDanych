@@ -1,7 +1,5 @@
 package backend.entities;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -13,11 +11,6 @@ public class DrugsEntity {
     private String drugPurpose;
     private Collection<DosageCollisionsEntity> dosageCollisionsByDrugId;
     private Collection<DosagesEntity> dosagesByDrugId;
-    private SimpleStringProperty drugNameProperty;
-
-    public SimpleStringProperty drugNamePropertyProperty() {
-        return drugNameProperty;
-    }
 
     @Id
     @Column(name = "drug_id")

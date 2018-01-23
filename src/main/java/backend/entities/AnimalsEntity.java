@@ -11,7 +11,6 @@ public class AnimalsEntity {
     private DivisionsEntity divisionsByDivisionId;
     private Collection<DosagesEntity> dosagesByAnimalId;
 
-
     @Id
     @Column(name = "animal_id")
     public int getAnimalId() {
@@ -40,9 +39,7 @@ public class AnimalsEntity {
         AnimalsEntity eAnimals = (AnimalsEntity) o;
 
         if (animalId != eAnimals.animalId) return false;
-        if (animalName != null ? !animalName.equals(eAnimals.animalName) : eAnimals.animalName != null) return false;
-
-        return true;
+        return animalName != null ? animalName.equals(eAnimals.animalName) : eAnimals.animalName == null;
     }
 
     @Override
@@ -70,4 +67,5 @@ public class AnimalsEntity {
     public void setDosagesByAnimalId(Collection<DosagesEntity> dosagesByAnimalId) {
         this.dosagesByAnimalId = dosagesByAnimalId;
     }
+
 }

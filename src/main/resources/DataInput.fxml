@@ -2,28 +2,29 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8.0.141"
+<AnchorPane prefHeight="400.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/8.0.141"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.DataInputController">
    <children>
        <ComboBox fx:id="animalComboBox" layoutX="14.0" layoutY="14.0" prefWidth="150.0" promptText="Zwierzę"/>
        <ComboBox fx:id="drug1ComboBox" layoutX="14.0" layoutY="63.0" prefWidth="150.0" promptText="Lek pierwszy"/>
        <ComboBox fx:id="drug2ComboBox" layoutX="14.0" layoutY="95.0" prefWidth="150.0" promptText="Lek drugi"/>
        <ComboBox fx:id="drug3ComboBox" layoutX="14.0" layoutY="127.0" prefWidth="150.0" promptText="Lek trzeci"/>
-       <TableView fx:id="collisionTableView" layoutX="217.0" layoutY="27.0" prefHeight="200.0" prefWidth="450.0">
+       <TableView fx:id="collisionTableView" layoutX="179.0" layoutY="27.0" prefHeight="137.0" prefWidth="702.0">
         <columns>
-            <TableColumn fx:id="drug1Col" prefWidth="75.0" text="Lek 1"/>
-            <TableColumn fx:id="drug2Col" prefWidth="75.0" text="Lek 2"/>
-            <TableColumn fx:id="textCol" prefWidth="210.0" text="Ostrzeżenie"/>
-            <TableColumn fx:id="warnCol" minWidth="0.0" prefWidth="89.0" text="Informacja"/>
+            <TableColumn fx:id="drug1Col" prefWidth="111.0" text="Lek 1"/>
+            <TableColumn fx:id="drug2Col" prefWidth="93.0" text="Lek 2"/>
+            <TableColumn fx:id="textCol" prefWidth="132.0" text="Ostrzeżenie"/>
+            <TableColumn fx:id="warnCol" minWidth="0.0" prefWidth="363.0" text="Informacja"/>
         </columns>
       </TableView>
-      <TableView layoutX="164.0" layoutY="237.0" prefHeight="137.0" prefWidth="349.0">
+       <TableView fx:id="dosageTableView" layoutX="179.0" layoutY="163.0" prefHeight="201.0" prefWidth="702.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="lek" />
-            <TableColumn prefWidth="45.0" text="min" />
-            <TableColumn prefWidth="43.0" text="max" />
-            <TableColumn prefWidth="71.0" text="jednostka" />
-            <TableColumn prefWidth="113.0" text="Droga podania" />
+             <TableColumn fx:id="drugDosageCol" prefWidth="150.0" text="Lek"/>
+             <TableColumn fx:id="minValueCol" prefWidth="71.0" text="min"/>
+             <TableColumn fx:id="maxValueCol" prefWidth="71.0" text="max"/>
+             <TableColumn fx:id="unitCol" prefWidth="66.0" text="Jednostka"/>
+             <TableColumn fx:id="methodCol" minWidth="0.0" prefWidth="107.0" text="Droga podania"/>
+             <TableColumn fx:id="commentCol1" prefWidth="235.0" text="Uwagi"/>
          </columns>
       </TableView>
    </children>
