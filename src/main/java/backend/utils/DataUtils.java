@@ -27,6 +27,20 @@ public class DataUtils {
         return drugs;
     }
 
+    public static List<DrugsEntity> getDrugsByAnimal(AnimalsEntity animal) {
+        List<DrugsEntity> drugs;
+        try (Session session = Connections.getSession()) {
+            String hql = "from DrugsEntity as d" +
+                    " join DosagesEntity on DosagesEntity .drugsByDrugId=DrugsEntity.drugName" +
+                    " join  AnimalsEntity as a on DosagesEntity .animalsByAnimalId=AnimalsEntity .animalName" +
+                    " where a.animalName=:animalName";
+            Query q = session.createQuery(hql);
+            q.setParameter("animalName", animal.getAnimalName());
+            drugs = q.list();
+        }
+        return drugs;
+    }
+
     public static DrugsEntity getDrugByName(String name) {
         DrugsEntity drug;
         try (Session session = Connections.getSession()) {
